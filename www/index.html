@@ -3,7 +3,7 @@
   <head>        
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Socket.IO chat</title>
+    <title>Socket.IO ChatRoom</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -11,14 +11,13 @@
   <body>
     <div class="all">
       <div class="name">
-        <!-- <h2>请输入你的昵称</h2> -->
-        <input type="text" id="name" placeholder="请输入昵称..." autocomplete="off"> 
+        <input type="text" id="name" placeholder="请输入昵称..." autocomplete="off">
         <button id="nameBtn">确  定</button>
       </div>
       <div class="main">
         <div class="header">
           <img src="image/logo.jpg">
-          happy聊天室
+          ChatRoom
         </div>
         <div id="container">
           <div class="conversation">
@@ -42,13 +41,13 @@
                   <!-- autocomplete禁用自动完成功能 -->
                   <textarea id="m" autofocus></textarea>
                   <button class="btn rBtn" id="sub">发送</button>
-                  <button class="btn" id="clear">关闭</button>
+                  <button class="btn" id="clear">退出</button>
               </form>
           </div>
           <div class="contacts">
-            <h1>在线人员(<span id="num">0</span>)</h1>
+            <h1>当前在线人员(<span id="num">0</span>)</h1>
             <ul id="users"></ul>
-            <p>当前无人在线哟~</p>
+            <p>当前无人在线</p>
           </div>
         </div>
       </div> 

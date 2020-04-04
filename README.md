@@ -1,19 +1,19 @@
 # ChatRoom
 
+Node实现的实时聊天。
+
 ## 运行方式
 
 ```bash
-# 安装项目依赖
+# 安装项目依赖。
 npm install
-
-# 运行以下命令打开浏览器的localhost:3000查看
-cd happy-chat
+# 运行以下命令打开浏览器的 localhost:3000 查看。
 node server.js
 ```
 
 ## 技术栈
 
-> node+express+socket.io+jquery+flex
+> jQuery + express
 
 ## 实现功能
 

@@ -5,7 +5,7 @@
 }
 body {
   font: 13px "微软雅黑", Helvetica, Arial;
-  background: url("../image/bg3.jpg");
+  background-image: url("../image/bg3.jpg");
   background-size: cover;
 }
 .name {

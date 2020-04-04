@@ -1,16 +1,15 @@
-$(function() {
+$(function () {
   // io-client
-  // 连接成功会触发服务器端的connection事件
+  // 连接成功会触发服务器端的 connection 事件。
   var socket = io();
-
-  // 监听键盘回车
+  // 监听键盘回车。
   $("#name").keyup(ev => {
     if (ev.which == 13) {
       inputName();
     }
   });
   $("#nameBtn").click(inputName);
-  // 登录成功，隐藏登录层
+  // 登录成功，隐藏登录层。
   socket.on("loginSuc", () => {
     $(".name").hide();
   });
@@ -18,62 +17,50 @@ $(function() {
     alert("用户名已存在，请重新输入！");
     $("#name").val("");
   });
-
   function inputName() {
-    var imgN = Math.floor(Math.random() * 10) + 1; // 随机分配头像
-    if (
-      $("#name")
-        .val()
-        .trim() !== ""
-    )
+    // 随机分配头像。
+    var imgN = Math.floor(Math.random() * 10) + 1;
+    if ($("#name").val().trim() !== "")
+      // 触发登录事件。
       socket.emit("login", {
         name: $("#name").val(),
         img: "image/user" + imgN + ".jpg"
-      }); // 触发登录事件
+      });
     return false;
   }
-
-  // 系统提示消息
+  // 系统提示消息。
   socket.on("system", user => {
     var data = new Date().toTimeString().substr(0, 8);
     $("#messages").append(
-      `<p class='system'><span>${data}</span><br /><span>${user.name}  ${
-        user.status
-      }了聊天室<span></p>`
+      `<p class='system'><span>${data}</span><br /><span>${user.name}  ${user.status}了聊天室<span></p>`
     );
-    // 滚动条总是在最底部
+    // 滚动条总是在最底部。
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   });
-
-  // 监听抖动事件
+  // 监听抖动事件。
   socket.on("shake", user => {
     var data = new Date().toTimeString().substr(0, 8);
     $("#messages").append(
-      `<p class='system'><span>${data}</span><br /><span>${
-        user.name
-      }发送了一个窗口抖动</span></p>`
+      `<p class='system'><span>${data}</span><br /><span>${user.name}发送了一个窗口抖动</span></p>`
     );
     shake();
-    // 滚动条总是在最底部
+    // 滚动条总是在最底部。
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   });
-
-  // 显示在线人员
+  // 显示在线人员。
   socket.on("disUser", usersInfo => {
     displayUser(usersInfo);
   });
-
-  // 发送消息
+  // 发送消息。
   $("#sub").click(sendMsg);
   $("#m").keyup(ev => {
     if (ev.which == 13) {
       sendMsg();
     }
   });
-
-  // 接收消息
+  // 接收消息。
   socket.on("receiveMsg", obj => {
-    // 发送为图片
+    // 发送为图片。
     if (obj.type == "img") {
       $("#messages").append(`
           <li class='${obj.side}'>
@@ -87,14 +74,12 @@ $(function() {
       $("#messages").scrollTop($("#messages")[0].scrollHeight);
       return;
     }
-
-    // 提取文字中的表情加以渲染
+    // 提取文字中的表情加以渲染。
     var msg = obj.msg;
     var content = "";
     while (msg.indexOf("[") > -1) {
       var start = msg.indexOf("[");
       var end = msg.indexOf("]");
-
       content += "<span>" + msg.substr(0, start) + "</span>";
       content +=
         '<img src="image/emoji/emoji%20(' +
@@ -103,7 +88,6 @@ $(function() {
       msg = msg.substr(end + 1, msg.length);
     }
     content += "<span>" + msg + "</span>";
-
     $("#messages").append(`
         <li class='${obj.side}'>
           <img src="${obj.img}">
@@ -113,11 +97,10 @@ $(function() {
           </div>
         </li>
       `);
-    // 滚动条总是在最底部
+    // 滚动条总是在最底部。
     $("#messages").scrollTop($("#messages")[0].scrollHeight);
   });
-
-  // 发送消息
+  // 发送消息。
   var color = "#000000";
   function sendMsg() {
     if ($("#m").val() == "") {
@@ -133,7 +116,6 @@ $(function() {
     $("#m").val("");
     return false;
   }
-
   var timer;
   function shake() {
     $(".main").addClass("shaking");
@@ -142,10 +124,10 @@ $(function() {
       $(".main").removeClass("shaking");
     }, 500);
   }
-
   // 显示在线人员
   function displayUser(users) {
-    $("#users").text(""); // 每次都要重新渲染
+    // 每次都要重新渲染。
+    $("#users").text("");
     if (!users.length) {
       $(".contacts p").show();
     } else {
@@ -160,14 +142,12 @@ $(function() {
       $("#users").append($html);
     }
   }
-
-  // 清空历史消息
+  // 清空历史消息。
   $("#clear").click(() => {
     $("#messages").text("");
     socket.emit("disconnect");
   });
-
-  // 渲染表情
+  // 渲染表情。
   init();
   function init() {
     for (var i = 0; i < 141; i++) {
@@ -180,8 +160,7 @@ $(function() {
       );
     }
   }
-
-  // 显示表情
+  // 显示表情。
   $("#smile").click(() => {
     $(".selectBox").css("display", "block");
   });
@@ -191,8 +170,7 @@ $(function() {
   $("#m").click(() => {
     $(".selectBox").css("display", "none");
   });
-
-  // 用户点击发送表情
+  // 用户点击发送表情。
   $(".emoji li img").click(ev => {
     ev = ev || window.event;
     var src = ev.target.src;
@@ -201,35 +179,32 @@ $(function() {
     $("#m").val(old + "[emoji" + emoji + "]");
     $(".selectBox").css("display", "none");
   });
-
-  // 用户发送抖动
-  $(".edit #shake").click(function() {
+  // 用户发送抖动。
+  $(".edit #shake").click(function () {
     socket.emit("shake");
   });
-
-  // 用户发送图片
-  $("#file").change(function() {
-    // 上传单张图片
+  // 用户发送图片。
+  $("#file").change(function () {
+    // 上传单张图片。
     var file = this.files[0];
     var reader = new FileReader();
-
-    //文件读取出错的时候触发
-    reader.onerror = function() {
+    //文件读取出错的时候触发。
+    reader.onerror = function () {
       console.log("读取文件失败，请重试！");
     };
-    // 读取成功后
-    reader.onload = function() {
-      // 读取结果
+    // 读取成功后。
+    reader.onload = function () {
+      // 读取结果。
       var src = reader.result;
       var img = '<img class="sendImg" src="' + src + '">';
-      // 发送
+      // 发送。
       socket.emit("sendMsg", {
         msg: img,
         color: color,
         type: "img"
       });
     };
-    // 读取为64位
+    // 读取为64位。
     reader.readAsDataURL(file);
   });
 });

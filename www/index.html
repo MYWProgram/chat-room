@@ -3,29 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Socket.IO ChatRoom</title>
+    <title>ChatRoom</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="style/index.css" />
-    <link
-      rel="stylesheet"
-      href="style/font-awesome-4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css" />
   </head>
   <body>
     <div class="all">
       <div class="name">
-        <input
-          type="text"
-          id="name"
-          placeholder="请输入昵称..."
-          autocomplete="off"
-        />
+        <input type="text" id="name" placeholder="请输入昵称..." autocomplete="off" />
         <button id="nameBtn">确 定</button>
       </div>
       <div class="main">
         <div class="header">
-          <img src="image/logo.jpg" />
-          ChatRoom
+          <div class="header-image_wrapper">
+            <img src="image/logo.jpg" />
+          </div>
+          <h1>ChatRoom</h1>
         </div>
         <div id="container">
           <div class="conversation">
@@ -45,7 +39,7 @@
                   </div>
                 </div>
               </div>
-              <!-- autocomplete禁用自动完成功能 -->
+              <!-- autocomplete 禁用自动完成功能。 -->
               <textarea id="m" autofocus></textarea>
               <button class="btn rBtn" id="sub">发送</button>
               <button class="btn" id="clear">退出</button>
@@ -59,9 +53,9 @@
         </div>
       </div>
     </div>
-    <!-- 加载全局io -->
+    <!-- 加载全局 io. -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="js/chat-client.js"></script>
   </body>
 </html>

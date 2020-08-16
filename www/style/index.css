@@ -164,6 +164,7 @@ p.system span {
   place-self: start center;
 }
 .right div {
+  position: relative;
   grid-area: a;
   place-self: start end;
   margin-right: 5px;
@@ -182,9 +183,27 @@ p.system span {
   place-self: start center;
 }
 .left div {
+  position: relative;
   grid-area: b;
   place-self: start start;
   margin-left: 5px;
+}
+.right div::after,
+.left div::after {
+  position: absolute;
+  top: calc(50% - 10px);
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  content: '';
+}
+.right div::after {
+  right: -5px;
+  background-color: #86bdf8;
+}
+.left div::after {
+  left: -5px;
+  background-color: #D5D3D3;
 }
 #messages li div > span {
   display: block;

@@ -21,6 +21,6 @@
   "homepage": "https://github.com/MYWProgram/ChatRoom#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.4.0"
   }
 }
